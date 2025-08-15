@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
 import { X } from 'lucide-react';
+
+// TypeScript declaration for window.ethereum
+declare global {
+  interface Window {
+    ethereum?: {
+      request: (args: { method: string; params?: any[] }) => Promise<any>;
+      selectedAddress: string | null;
+      isMetaMask?: boolean;
+    };
+  }
+}
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useWallet } from '@/contexts/WalletContext';
