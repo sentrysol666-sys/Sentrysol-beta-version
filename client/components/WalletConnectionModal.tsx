@@ -139,7 +139,8 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
               <div className="space-y-3">
                 <Button
                   onClick={() => handleWalletSelect('phantom')}
-                  className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px]"
+                  disabled={connecting || isConnecting}
+                  className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px] disabled:opacity-50"
                 >
                   <div className="flex items-center gap-3">
                     <img
@@ -152,7 +153,8 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
                 </Button>
                 <Button
                   onClick={() => handleWalletSelect('solflare')}
-                  className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px]"
+                  disabled={connecting || isConnecting}
+                  className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px] disabled:opacity-50"
                 >
                   <div className="flex items-center gap-3">
                     <img
@@ -168,7 +170,8 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
               <div className="space-y-3">
                 <Button
                   onClick={() => handleWalletSelect('metamask')}
-                  className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px]"
+                  disabled={connecting || isConnecting}
+                  className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px] disabled:opacity-50"
                 >
                   <div className="flex items-center gap-3">
                     <span>🦊</span>
