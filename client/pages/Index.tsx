@@ -18,41 +18,54 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Navigation */}
-      <nav className="flex items-center justify-between px-8 lg:px-48 py-6 bg-black/90 backdrop-blur-sm fixed w-full top-0 z-50">
+      <nav
+        className="flex items-center justify-between px-8 lg:px-48 py-6 fixed w-full top-0 z-50"
+        style={{
+          background: "linear-gradient(180deg, #395B64 0%, #000 121.3%)",
+        }}
+      >
         <div className="flex items-center gap-3">
           <img
             src="https://cdn.builder.io/api/v1/image/assets%2F1bea0cc41c084038a6a915a367aa70f5%2F04eb1088e2114c479fc8093c14f130fb?format=webp&width=800"
             alt="SentrySol Logo"
-            className="w-10 h-10"
+            className="w-16 h-16"
           />
-          <span className="text-xl font-semibold">SENTRYSOL</span>
+          <span className="text-3xl lg:text-4xl font-semibold">SENTRYSOL</span>
         </div>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
           <a
             href="#"
-            className="text-white/70 hover:text-white transition-colors"
+            className="text-white hover:text-white/80 transition-colors text-2xl font-medium"
+          >
+            API
+          </a>
+          <a
+            href="#"
+            className="text-white hover:text-white/80 transition-colors text-2xl font-medium"
           >
             About
           </a>
           <a
-            href="#"
-            className="text-white/70 hover:text-white transition-colors"
+            href="https://sentrysol.gitbook.io/sentrysol/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white hover:text-white/80 transition-colors text-2xl font-medium"
           >
             Docs
           </a>
           <Link
             to="/pricing"
-            className="text-white/70 hover:text-white transition-colors"
+            className="text-white hover:text-white/80 transition-colors text-2xl font-medium"
           >
             Pricing
           </Link>
           <Button
             onClick={handleGetStarted}
-            className="bg-white/10 hover:bg-white/20 text-white border border-white/20"
+            className="bg-white hover:bg-white/90 text-black text-2xl font-medium px-8 py-6 rounded-full"
           >
-            Get Started
+            {isWalletConnected ? (walletAddress ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : 'Connected') : 'Start Demo'}
           </Button>
         </div>
 
