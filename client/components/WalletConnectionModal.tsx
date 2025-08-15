@@ -71,7 +71,11 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
                 }`}
               >
                 <div className="flex flex-col items-center gap-2">
-                  <span>⟠</span>
+                  <img
+                    src="https://cdn.builder.io/api/v1/image/assets%2Fb362352d7ea84bc3a397619b43158846%2F5d04d76da7b64de9a5ec34babe31fdd3?format=webp&width=800"
+                    alt="Ethereum"
+                    className="w-8 h-8"
+                  />
                   <span>Ethereum</span>
                 </div>
               </Button>
