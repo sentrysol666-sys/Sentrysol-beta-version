@@ -15,8 +15,35 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
   isOpen,
   onClose,
 }) => {
-  const { isWalletConnected, walletAddress } = useWallet();
+  const { isWalletConnected, walletAddress, connectWallet } = useWallet();
+  const { select, wallets } = useSolanaWallet();
   const [selectedNetwork, setSelectedNetwork] = useState<'solana' | 'ethereum'>('solana');
+
+  const handleWalletSelect = async (walletName: string) => {
+    try {
+      if (selectedNetwork === 'solana') {
+        const wallet = wallets.find(w =>
+          w.adapter.name.toLowerCase().includes(walletName.toLowerCase())
+        );
+        if (wallet) {
+          select(wallet.adapter.name);
+          await connectWallet();
+        }
+      } else if (selectedNetwork === 'ethereum') {
+        // Handle Ethereum wallet connection
+        if (walletName === 'metamask' && window.ethereum) {
+          try {
+            await window.ethereum.request({ method: 'eth_requestAccounts' });
+            onClose();
+          } catch (error) {
+            console.error('MetaMask connection failed:', error);
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Wallet connection failed:', error);
+    }
+  };
 
   React.useEffect(() => {
     if (isWalletConnected) {
