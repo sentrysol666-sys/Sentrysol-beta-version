@@ -26,9 +26,10 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
   isOpen,
   onClose,
 }) => {
-  const { isWalletConnected, walletAddress, connectWallet } = useWallet();
+  const { isWalletConnected, walletAddress, connectWallet, isConnecting } = useWallet();
   const { select, wallets } = useSolanaWallet();
   const [selectedNetwork, setSelectedNetwork] = useState<'solana' | 'ethereum'>('solana');
+  const [connecting, setConnecting] = useState(false);
 
   const handleWalletSelect = async (walletName: string) => {
     try {
