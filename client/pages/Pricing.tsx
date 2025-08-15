@@ -81,12 +81,14 @@ export default function Pricing() {
           >
             About
           </a>
-          <Link
-            to="/"
+          <a
+            href="https://sentrysol.gitbook.io/sentrysol/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-white hover:text-white/80 transition-colors text-2xl font-medium"
           >
             Docs
-          </Link>
+          </a>
           <Link
             to="/pricing"
             className="text-white hover:text-white/80 transition-colors text-2xl font-medium"
