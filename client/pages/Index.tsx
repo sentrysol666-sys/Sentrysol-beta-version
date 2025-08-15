@@ -108,10 +108,18 @@ export default function Index() {
                 href="#"
                 className="block text-white/70 hover:text-white transition-colors py-2"
               >
-                About
+                API
               </a>
               <a
                 href="#"
+                className="block text-white/70 hover:text-white transition-colors py-2"
+              >
+                About
+              </a>
+              <a
+                href="https://sentrysol.gitbook.io/sentrysol/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block text-white/70 hover:text-white transition-colors py-2"
               >
                 Docs
@@ -126,7 +134,7 @@ export default function Index() {
                 onClick={handleGetStarted}
                 className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20"
               >
-                Get Started
+                {isWalletConnected ? (walletAddress ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : 'Connected') : 'Start Demo'}
               </Button>
             </div>
           </div>
