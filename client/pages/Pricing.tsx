@@ -1,493 +1,336 @@
-import { Check, X, Menu } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { useWallet } from '@solana/wallet-adapter-react';
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
-import { useNavigate } from 'react-router-dom';
+import { Menu, X, Check } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Pricing() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { connected } = useWallet();
-  const navigate = useNavigate();
 
-  const handleGetStarted = () => {
-    if (connected) {
-      navigate('/dashboard');
-    } else {
-      const walletButton = document.querySelector('.wallet-adapter-button') as HTMLButtonElement;
-      if (walletButton) {
-        walletButton.click();
-      }
-    }
-  };
-
-  const plans = [
+  const pricingTiers = [
     {
-      name: "Starter",
-      price: "Free",
-      description: "Perfect for individual users getting started with Web3 security",
+      name: "Normies",
+      description: "Perfect for students, Normies, & early adopters.",
+      buttonText: "Get Started",
       features: [
-        "Basic threat detection",
-        "Phishing protection",
-        "Community support",
-        "Up to 10 transactions/day",
-        "Basic analytics"
+        "Cross-chain trace ( SOL & ETH)",
+        "Basic Risk Score & Wallet Screening",
+        "5 address req/day",
+        "Watermark fund flow",
       ],
-      limitations: [
-        "No advanced AI features",
-        "Limited transaction volume",
-        "No priority support"
-      ],
-      cta: "Get Started",
-      popular: false
     },
     {
       name: "Pro",
-      price: "$29",
-      period: "/month",
-      description: "Advanced protection for power users and professionals",
+      description: "For independent investigators & small teams",
+      buttonText: "$299 / month",
       features: [
-        "Advanced AI threat detection",
-        "Real-time anomaly detection",
-        "Priority support",
-        "Unlimited transactions",
-        "Advanced analytics dashboard",
-        "Custom security rules",
-        "API access",
-        "Smart contract auditing"
+        "Cross-chain tracing (up to 3 chains)",
+        "Up to +100req/day",
+        "Email support",
+        "Fund flow visualization",
+        "Monthly report export",
+        "Email support",
       ],
-      limitations: [],
-      cta: "Start Pro Trial",
-      popular: true
     },
     {
       name: "Enterprise",
-      price: "Custom",
-      description: "Comprehensive security solution for organizations and large-scale operations",
+      description:
+        "Perfect for enterprises, large teams, & advanced security needs.",
+      buttonText: "Contact US",
       features: [
-        "Everything in Pro",
-        "Dedicated account manager",
-        "Custom integrations",
-        "On-premise deployment",
-        "Advanced compliance tools",
-        "Multi-user management",
-        "Custom AI model training",
-        "24/7 phone support",
-        "SLA guarantees"
+        "Unlimited cross-chain coverage",
+        "AML & sanctions screening",
+        "Media monitoring & OSINT tools",
+        "Custom ML model fine-tuning",
+        "Historical chain data access",
+        "Custom API & webhook integration",
+        "24/7 premium support",
       ],
-      limitations: [],
-      cta: "Contact Sales",
-      popular: false
-    }
+    },
   ];
 
   return (
-    <div className="min-h-screen main-gradient relative">
-      {/* Background Pattern */}
-      <div className="absolute top-0 left-0 w-full h-full z-[1] opacity-30">
-        <img
-          src="https://api.builder.io/api/v1/image/assets/TEMP/c825e8e63e3c0adb94bef5f03f13e3ea4131deac?width=3842"
-          alt="Line pattern background"
-          className="w-full h-full object-cover"
-        />
-      </div>
+    <div className="min-h-screen bg-black text-white">
+      {/* Navigation */}
+      <nav
+        className="flex items-center justify-between px-8 lg:px-48 py-6 fixed w-full top-0 z-50"
+        style={{
+          background: "linear-gradient(180deg, #395B64 0%, #000 121.3%)",
+        }}
+      >
+        <div className="flex items-center gap-3">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets%2F1bea0cc41c084038a6a915a367aa70f5%2F04eb1088e2114c479fc8093c14f130fb?format=webp&width=800"
+            alt="SentrySol Logo"
+            className="w-16 h-16"
+          />
+          <span className="text-3xl lg:text-4xl font-semibold">SENTRYSOL</span>
+        </div>
 
-      {/* Navbar */}
-      <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-6xl h-auto z-50 px-4">
-        <div className="flex flex-col md:flex-row items-center justify-between w-full h-auto px-4 py-4 rounded-3xl md:rounded-full border border-white/10 bg-white/10 backdrop-blur-sm gap-4 md:gap-0">
-          {/* Mobile Logo */}
-          <div className="flex items-center gap-3 md:hidden">
-            <img
-              src="https://api.builder.io/api/v1/image/assets/TEMP/3249d81bd5a0516fe5c613581be785b53ef9877e?width=130"
-              alt="SentrySol Logo"
-              className="w-8 h-8"
-            />
-            <span className="text-white font-poppins text-xl font-bold leading-none">
-              SENTRYSOL
-            </span>
-          </div>
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center gap-8">
+          <a
+            href="#"
+            className="text-white hover:text-white/80 transition-colors text-2xl font-medium"
+          >
+            API
+          </a>
+          <a
+            href="#"
+            className="text-white hover:text-white/80 transition-colors text-2xl font-medium"
+          >
+            About
+          </a>
+          <Link
+            to="/"
+            className="text-white hover:text-white/80 transition-colors text-2xl font-medium"
+          >
+            Docs
+          </Link>
+          <Link
+            to="/pricing"
+            className="text-white hover:text-white/80 transition-colors text-2xl font-medium"
+          >
+            Pricing
+          </Link>
+          <Button className="bg-white hover:bg-white/90 text-black text-2xl font-medium px-8 py-6 rounded-full">
+            Connect
+          </Button>
+        </div>
 
-          <div className="flex flex-col md:flex-row items-center justify-between w-full h-auto gap-4 md:gap-0">
-            {/* Desktop Logo and Navigation */}
-            <div className="hidden md:flex items-center gap-8 lg:gap-12">
-              {/* Logo */}
-              <div className="flex items-center gap-3">
-                <img
-                  src="https://api.builder.io/api/v1/image/assets/TEMP/3249d81bd5a0516fe5c613581be785b53ef9877e?width=130"
-                  alt="SentrySol Logo"
-                  className="w-10 h-10"
-                />
-                <span className="text-white font-poppins text-2xl lg:text-3xl font-bold leading-none">
-                  SENTRYSOL
-                </span>
-              </div>
-
-              {/* Navigation Links */}
-              <div className="flex items-center gap-6 lg:gap-8">
-                <a
-                  href="/"
-                  className="text-white font-poppins text-lg font-normal leading-none hover:text-white/80 transition-colors"
-                >
-                  Home
-                </a>
-                <a
-                  href="#"
-                  className="text-white font-poppins text-lg font-normal leading-none hover:text-white/80 transition-colors"
-                >
-                  Products
-                </a>
-                <a
-                  href="#"
-                  className="text-white font-poppins text-lg font-normal leading-none hover:text-white/80 transition-colors"
-                >
-                  About
-                </a>
-                <a
-                  href="#"
-                  className="text-white font-poppins text-lg font-normal leading-none hover:text-white/80 transition-colors"
-                >
-                  Docs
-                </a>
-                <a
-                  href="/pricing"
-                  className="text-sentry-sage font-poppins text-lg font-normal leading-none hover:text-sentry-sage/80 transition-colors"
-                >
-                  Pricing
-                </a>
-                <WalletMultiButton className="!bg-white !text-black !font-poppins !text-lg !font-normal !leading-none !px-4 !py-2 !rounded-full hover:!bg-white/90 !transition-colors !border-none" />
-              </div>
-            </div>
-
-            {/* Mobile Navigation */}
-            <div className="md:hidden relative">
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="text-white p-2"
-              >
-                <Menu className="w-6 h-6" />
-              </button>
-              {isMobileMenuOpen && (
-                <div className="absolute top-full right-0 mt-2 bg-black/90 backdrop-blur-sm border border-white/10 rounded-2xl p-4 flex flex-col gap-4 min-w-[200px]">
-                  <a
-                    href="/"
-                    className="text-white font-poppins hover:text-white/80 transition-colors"
-                  >
-                    Home
-                  </a>
-                  <a
-                    href="#"
-                    className="text-white font-poppins hover:text-white/80 transition-colors"
-                  >
-                    Products
-                  </a>
-                  <a
-                    href="#"
-                    className="text-white font-poppins hover:text-white/80 transition-colors"
-                  >
-                    About
-                  </a>
-                  <a
-                    href="#"
-                    className="text-white font-poppins hover:text-white/80 transition-colors"
-                  >
-                    Docs
-                  </a>
-                  <a
-                    href="/pricing"
-                    className="text-sentry-sage font-poppins hover:text-sentry-sage/80 transition-colors"
-                  >
-                    Pricing
-                  </a>
-                  <WalletMultiButton className="!bg-white !text-black !font-poppins !text-sm !font-normal !leading-none !px-4 !py-2 !rounded-full hover:!bg-white/90 !transition-colors !border-none" />
-                </div>
-              )}
-            </div>
+        {/* Search Box */}
+        <div className="hidden lg:block relative">
+          <Input
+            placeholder="I'am looking for..."
+            className="w-64 bg-transparent border border-white/50 text-white placeholder:text-white/60 rounded-full px-6 py-3"
+          />
+          <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 19 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M17.4916 18.473L11.1916 12.173C10.6916 12.573 10.1166 12.8897 9.4666 13.123C8.8166 13.3564 8.12494 13.473 7.3916 13.473C5.57493 13.473 4.03744 12.8439 2.7791 11.5855C1.52077 10.3272 0.891602 8.78969 0.891602 6.97302C0.891602 5.15636 1.52077 3.61886 2.7791 2.36052C4.03744 1.10219 5.57493 0.473022 7.3916 0.473022C9.20827 0.473022 10.7458 1.10219 12.0041 2.36052C13.2624 3.61886 13.8916 5.15636 13.8916 6.97302C13.8916 7.70636 13.7749 8.39802 13.5416 9.04802C13.3083 9.69802 12.9916 10.273 12.5916 10.773L18.8916 17.073L17.4916 18.473ZM7.3916 11.473C8.6416 11.473 9.7041 11.0355 10.5791 10.1605C11.4541 9.28552 11.8916 8.22302 11.8916 6.97302C11.8916 5.72302 11.4541 4.66052 10.5791 3.78552C9.7041 2.91052 8.6416 2.47302 7.3916 2.47302C6.1416 2.47302 5.0791 2.91052 4.2041 3.78552C3.3291 4.66052 2.8916 5.72302 2.8916 6.97302C2.8916 8.22302 3.3291 9.28552 4.2041 10.1605C5.0791 11.0355 6.1416 11.473 7.3916 11.473Z"
+                fill="white"
+                fillOpacity="0.35"
+              />
+            </svg>
           </div>
         </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden text-white p-2"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="absolute top-full left-0 w-full bg-black/95 backdrop-blur-sm border-t border-white/10 md:hidden">
+            <div className="px-8 py-6 space-y-4">
+              <a
+                href="#"
+                className="block text-white/70 hover:text-white transition-colors py-2"
+              >
+                API
+              </a>
+              <a
+                href="#"
+                className="block text-white/70 hover:text-white transition-colors py-2"
+              >
+                About
+              </a>
+              <Link
+                to="/"
+                className="block text-white/70 hover:text-white transition-colors py-2"
+              >
+                Docs
+              </Link>
+              <Link
+                to="/pricing"
+                className="block text-white/70 hover:text-white transition-colors py-2"
+              >
+                Pricing
+              </Link>
+              <Button className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20">
+                Connect
+              </Button>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
-      <section className="relative z-[2] pt-32 pb-20 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="font-poppins text-4xl sm:text-6xl lg:text-8xl font-bold leading-tight uppercase gradient-text mb-8">
-            Pricing
+      <section className="pt-40 pb-20 px-8 lg:px-48 text-center relative bg-gradient-to-b from-teal-900/30 to-black">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-400/20 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-blue-400/20 rounded-full blur-3xl"></div>
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <h1 className="text-5xl md:text-7xl lg:text-9xl font-bold leading-tight mb-8 bg-gradient-to-r from-white/0 via-white/80 to-white/0 bg-clip-text text-transparent uppercase tracking-[0.2em]">
+            Simple Plans
+            <br />
+            Powerful Protection
           </h1>
-          <p className="text-white font-poppins text-xl font-normal leading-relaxed max-w-3xl mx-auto mb-16">
-            Choose the perfect plan for your Web3 security needs. Start with our free tier or unlock advanced AI-powered protection.
-          </p>
         </div>
       </section>
 
-      {/* Pricing Plans */}
-      <section className="relative z-[2] py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {plans.map((plan, index) => (
-              <div
-                key={plan.name}
-                className={`relative h-auto ${plan.popular ? 'lg:-mt-8' : ''}`}
-              >
-                <div className={`relative w-full h-full rounded-3xl border-2 ${plan.popular ? 'border-sentry-sage' : 'border-white/30'} bg-gradient-to-b from-white/5 to-transparent backdrop-blur-sm p-8 flex flex-col`}>
-                  {plan.popular && (
-                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-sentry-sage text-black px-4 py-2 rounded-full text-sm font-poppins font-bold">
-                      Most Popular
-                    </div>
-                  )}
-                  
-                  {/* Plan Header */}
-                  <div className="text-center mb-8">
-                    <h3 className="text-white font-poppins text-2xl font-bold mb-4">
-                      {plan.name}
-                    </h3>
-                    <div className="mb-4">
-                      <span className="text-white font-poppins text-4xl font-bold">
-                        {plan.price}
-                      </span>
-                      {plan.period && (
-                        <span className="text-white/70 font-poppins text-lg">
-                          {plan.period}
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-white/80 font-poppins text-sm leading-relaxed">
-                      {plan.description}
-                    </p>
-                  </div>
+      {/* Pricing Cards */}
+      <section className="py-20 px-8 lg:px-24 relative bg-gradient-to-b from-black to-teal-900/20">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="w-full h-full bg-gradient-to-r from-transparent via-teal-500/10 to-transparent"></div>
+        </div>
 
-                  {/* Features */}
-                  <div className="flex-1 mb-8">
-                    <h4 className="text-white font-poppins text-lg font-semibold mb-4">
-                      Features included:
-                    </h4>
-                    <ul className="space-y-3">
-                      {plan.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-3">
-                          <Check className="w-5 h-5 text-sentry-sage mt-0.5 flex-shrink-0" />
-                          <span className="text-white/90 font-poppins text-sm">
-                            {feature}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
+        <div className="relative z-10 grid lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
+          {pricingTiers.map((tier, index) => (
+            <div
+              key={tier.name}
+              className="bg-gradient-to-b from-white/20 to-white/5 border border-white rounded-[3rem] p-12 backdrop-blur-[50px] flex flex-col"
+            >
+              {/* Header */}
+              <div className="mb-12 min-h-[320px] flex flex-col">
+                <h3 className="text-5xl lg:text-6xl font-light mb-6 text-white leading-tight tracking-tight">
+                  {tier.name}
+                </h3>
+                <p className="text-white/80 text-xl leading-relaxed">
+                  {tier.description}
+                </p>
+              </div>
 
-                    {plan.limitations.length > 0 && (
-                      <div className="mt-6">
-                        <h4 className="text-white/70 font-poppins text-sm font-semibold mb-3">
-                          Limitations:
-                        </h4>
-                        <ul className="space-y-2">
-                          {plan.limitations.map((limitation, idx) => (
-                            <li key={idx} className="flex items-start gap-3">
-                              <X className="w-4 h-4 text-white/50 mt-0.5 flex-shrink-0" />
-                              <span className="text-white/60 font-poppins text-xs">
-                                {limitation}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
+              {/* CTA Button */}
+              <div className="mb-6">
+                <Button className="w-full bg-[#00FFF2] hover:bg-[#00FFF2]/90 text-white text-xl font-medium py-6 rounded-[30px] shadow-lg">
+                  {tier.buttonText}
+                </Button>
+              </div>
+
+              {/* Divider */}
+              <div className="w-full h-px bg-[#8EFFD0] mb-6"></div>
+
+              {/* Features */}
+              <div className="flex-1">
+                <h4 className="text-white text-[22px] font-medium mb-4">
+                  Key features:
+                </h4>
+                <div className="space-y-4">
+                  {tier.features.map((feature, featureIndex) => (
+                    <div key={featureIndex} className="flex items-start gap-4">
+                      <div className="flex-shrink-0 mt-1">
+                        <div className="w-2 h-2 bg-[#14F195] rounded-full"></div>
                       </div>
-                    )}
-                  </div>
-
-                  {/* CTA Button */}
-                  <button
-                    onClick={plan.cta === "Get Started" ? handleGetStarted : undefined}
-                    className={`w-full font-poppins text-lg font-normal leading-none px-6 py-4 rounded-full transition-colors ${
-                      plan.popular
-                        ? 'bg-sentry-sage text-black hover:bg-sentry-sage/90'
-                        : 'bg-sentry-accent/20 text-white hover:bg-sentry-accent/30 border border-white/24'
-                    }`}
-                  >
-                    {plan.cta}
-                  </button>
+                      <span className="text-white/80 text-xl leading-relaxed">
+                        {feature}
+                      </span>
+                    </div>
+                  ))}
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Wave Animation */}
+        <div className="absolute bottom-0 left-0 w-full h-64 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-t from-teal-900/30 to-transparent"></div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="relative z-[2] py-20 px-4">
+      {/* FAQs Section */}
+      <section className="py-32 px-8 lg:px-48 text-center bg-gradient-to-b from-teal-900/20 to-black">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-center font-poppins text-3xl sm:text-5xl lg:text-6xl font-normal leading-tight tracking-wide gradient-section-text mb-16">
-            Frequently Asked Questions
+          <h2 className="text-6xl md:text-8xl lg:text-9xl font-light mb-12 tracking-[4rem] text-white">
+            F A Q s
           </h2>
-
-          <div className="space-y-6">
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
-              <h3 className="text-white font-poppins text-xl font-semibold mb-4">
-                Is the free plan really free forever?
-              </h3>
-              <p className="text-white/80 font-poppins text-base leading-relaxed">
-                Yes! Our Starter plan is completely free and includes basic security features. Perfect for getting started with Web3 security.
-              </p>
-            </div>
-
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
-              <h3 className="text-white font-poppins text-xl font-semibold mb-4">
-                Can I upgrade or downgrade my plan anytime?
-              </h3>
-              <p className="text-white/80 font-poppins text-base leading-relaxed">
-                Absolutely! You can change your plan at any time. Upgrades take effect immediately, and downgrades take effect at the next billing cycle.
-              </p>
-            </div>
-
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
-              <h3 className="text-white font-poppins text-xl font-semibold mb-4">
-                Do you offer enterprise-level support?
-              </h3>
-              <p className="text-white/80 font-poppins text-base leading-relaxed">
-                Yes, our Enterprise plan includes dedicated account management, 24/7 phone support, and SLA guarantees for mission-critical applications.
-              </p>
-            </div>
-
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
-              <h3 className="text-white font-poppins text-xl font-semibold mb-4">
-                How does the AI threat detection work?
-              </h3>
-              <p className="text-white/80 font-poppins text-base leading-relaxed">
-                Our AI models run locally on your device, analyzing behavioral patterns and transaction data to detect anomalies and potential threats in real-time, without compromising your privacy.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="relative z-[2] py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
-          <h2 className="text-white font-poppins text-3xl sm:text-5xl lg:text-6xl font-normal leading-tight">
-            Ready to Secure Your Web3 Journey?
-          </h2>
-          <p className="text-white/80 font-poppins text-xl font-normal leading-relaxed max-w-2xl mx-auto">
-            Join thousands of users protecting their digital assets with SentrySol's advanced AI security.
-          </p>
-          <button
-            onClick={handleGetStarted}
-            className="bg-sentry-sage text-black font-poppins text-lg font-normal leading-none px-8 py-4 rounded-full hover:bg-sentry-sage/90 transition-colors"
-          >
-            {connected ? 'Go to Dashboard' : 'Get Started Today'}
-          </button>
+          <Button className="bg-teal-500/20 hover:bg-teal-500/30 text-white border-0 text-2xl font-light px-12 py-6 rounded-[33px] tracking-wide">
+            Read More
+          </Button>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="relative z-[2] bg-sentry-footer">
-        <div className="max-w-7xl mx-auto px-8 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-            {/* Logo and Description */}
-            <div className="lg:col-span-2 space-y-6">
-              <div className="flex items-center gap-4">
+      <footer className="px-8 lg:px-48 py-16" style={{ background: "#2C3333" }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 max-w-7xl mx-auto">
+          {/* Newsletter */}
+          <div className="lg:col-span-2">
+            <div className="mb-8">
+              <div className="flex items-center gap-3 mb-6">
                 <img
-                  src="https://api.builder.io/api/v1/image/assets/TEMP/7a2765d9790496907d7a42bab916df1a729b35e2?width=78"
+                  src="https://cdn.builder.io/api/v1/image/assets%2F1bea0cc41c084038a6a915a367aa70f5%2F04eb1088e2114c479fc8093c14f130fb?format=webp&width=800"
                   alt="SentrySol Logo"
                   className="w-10 h-10"
                 />
-                <span className="text-white font-poppins text-xl font-bold leading-none">
-                  SENTRYSOL
-                </span>
+                <span className="text-xl font-semibold">SENTRYSOL</span>
               </div>
-
-              <p className="text-white/70 font-poppins text-base font-normal leading-relaxed max-w-md">
+              <p className="text-white/60 text-lg leading-relaxed max-w-md mb-8">
                 SentrySol is an AI-native, on-device behavioral security
                 framework built specifically for Web3 mobile environments,
                 initially focusing on Solana Mobile Seeker.
               </p>
             </div>
 
-            {/* Explore */}
-            <div className="space-y-6">
-              <h3 className="text-white font-poppins text-lg font-bold leading-tight">
-                Explore
-              </h3>
-              <div className="space-y-4">
-                <a
-                  href="#"
-                  className="block text-white/70 font-poppins text-base font-normal leading-relaxed hover:text-white transition-colors"
-                >
-                  Press & Media
-                </a>
-                <a
-                  href="#"
-                  className="block text-white/70 font-poppins text-base font-normal leading-relaxed hover:text-white transition-colors"
-                >
-                  Community
-                </a>
-                <a
-                  href="#"
-                  className="block text-white/70 font-poppins text-base font-normal leading-relaxed hover:text-white transition-colors"
-                >
-                  Contact
-                </a>
-              </div>
-            </div>
-
-            {/* Resources */}
-            <div className="space-y-6">
-              <h3 className="text-white font-poppins text-lg font-bold leading-tight">
-                Resources
-              </h3>
-              <div className="space-y-4">
-                <a
-                  href="#"
-                  className="block text-white/70 font-poppins text-base font-normal leading-relaxed hover:text-white transition-colors"
-                >
-                  Whitepaper
-                </a>
-                <a
-                  href="#"
-                  className="block text-white/70 font-poppins text-base font-normal leading-relaxed hover:text-white transition-colors"
-                >
-                  Documentation
-                </a>
-                <a
-                  href="#"
-                  className="block text-white/70 font-poppins text-base font-normal leading-relaxed hover:text-white transition-colors"
-                >
-                  Integration
-                </a>
-                <a
-                  href="#"
-                  className="block text-white/70 font-poppins text-base font-normal leading-relaxed hover:text-white transition-colors"
-                >
-                  Blog
-                </a>
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Join a Newsletter</h4>
+              <div className="flex gap-4 max-w-md">
+                <Input
+                  placeholder="Enter Your Email"
+                  className="bg-white/5 border-white/20 text-white placeholder:text-white/60 rounded-xl"
+                />
+                <Button className="bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-xl px-8">
+                  Submit
+                </Button>
               </div>
             </div>
           </div>
 
-          {/* Newsletter */}
-          <div className="mt-16 pt-8 border-t border-white/15">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <h3 className="text-white font-poppins text-xl font-bold leading-tight mb-4">
-                  Join our Newsletter
-                </h3>
-                <div className="flex gap-4">
-                  <input
-                    type="email"
-                    placeholder="Enter Your Email"
-                    className="flex-1 h-12 bg-white/2 rounded-xl px-4 text-white placeholder-white/60 border border-white/10 focus:outline-none focus:border-white/30"
-                  />
-                  <button className="bg-gradient-to-b from-white/12 to-transparent border border-transparent text-white font-poppins text-base font-normal leading-none px-6 py-3 rounded-xl hover:from-white/20 transition-all">
-                    Submit
-                  </button>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <span className="text-white/70 font-poppins text-base font-normal">
-                  SentrySol, 2025
-                </span>
-                <a
-                  href="#"
-                  className="text-white/70 font-poppins text-base font-normal hover:text-white transition-colors"
-                >
-                  LinkedIn
-                </a>
-              </div>
+          {/* Explore */}
+          <div>
+            <h4 className="text-lg font-semibold mb-6">Explore</h4>
+            <div className="space-y-4 text-white/60">
+              <a href="#" className="block hover:text-white transition-colors">
+                Press & Media
+              </a>
+              <a href="#" className="block hover:text-white transition-colors">
+                Social Media
+              </a>
+              <a href="#" className="block hover:text-white transition-colors">
+                Contact
+              </a>
             </div>
           </div>
+
+          {/* Resources */}
+          <div>
+            <h4 className="text-lg font-semibold mb-6">Resources</h4>
+            <div className="space-y-4 text-white/60">
+              <a href="#" className="block hover:text-white transition-colors">
+                Whitepaper
+              </a>
+              <a href="#" className="block hover:text-white transition-colors">
+                Documentation
+              </a>
+              <a href="#" className="block hover:text-white transition-colors">
+                Integration
+              </a>
+              <a href="#" className="block hover:text-white transition-colors">
+                API Reference
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer Bottom */}
+        <div className="border-t border-white/15 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center text-white/60">
+          <div className="flex items-center gap-4 mb-4 md:mb-0">
+            <div className="w-12 h-12 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full"></div>
+            <div className="w-12 h-12 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full"></div>
+          </div>
+          <p>SentrySol, 2025</p>
         </div>
       </footer>
     </div>
