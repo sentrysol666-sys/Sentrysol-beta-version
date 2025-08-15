@@ -122,7 +122,10 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
 
             {selectedNetwork === 'solana' ? (
               <div className="space-y-3">
-                <Button className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px]">
+                <Button
+                  onClick={() => handleWalletSelect('phantom')}
+                  className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px]"
+                >
                   <div className="flex items-center gap-3">
                     <img
                       src="https://cdn.builder.io/api/v1/image/assets%2Fb362352d7ea84bc3a397619b43158846%2Fa0ee3721c6204611aff0d26a60c15edd?format=webp&width=800"
@@ -132,7 +135,10 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
                     <span>Phantom Wallet</span>
                   </div>
                 </Button>
-                <Button className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px]">
+                <Button
+                  onClick={() => handleWalletSelect('solflare')}
+                  className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px]"
+                >
                   <div className="flex items-center gap-3">
                     <img
                       src="https://cdn.builder.io/api/v1/image/assets%2Fb362352d7ea84bc3a397619b43158846%2F0ef7749742f14bd8aaf4ac6ef43c7111?format=webp&width=800"
@@ -145,7 +151,10 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
               </div>
             ) : (
               <div className="space-y-3">
-                <Button className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px]">
+                <Button
+                  onClick={() => handleWalletSelect('metamask')}
+                  className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px]"
+                >
                   <div className="flex items-center gap-3">
                     <span>🦊</span>
                     <span>MetaMask</span>
