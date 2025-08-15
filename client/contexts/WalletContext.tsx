@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { useWallet as useSolanaWallet } from '@solana/wallet-adapter-react';
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { useWallet as useSolanaWallet } from "@solana/wallet-adapter-react";
 
 interface WalletContextType {
   isWalletConnected: boolean;
@@ -14,7 +14,7 @@ const WalletContext = createContext<WalletContextType | undefined>(undefined);
 export const useWallet = () => {
   const context = useContext(WalletContext);
   if (context === undefined) {
-    throw new Error('useWallet must be used within a WalletProvider');
+    throw new Error("useWallet must be used within a WalletProvider");
   }
   return context;
 };
@@ -24,7 +24,8 @@ interface WalletProviderProps {
 }
 
 export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
-  const { connected, publicKey, connect, disconnect, connecting } = useSolanaWallet();
+  const { connected, publicKey, connect, disconnect, connecting } =
+    useSolanaWallet();
   const [isWalletConnected, setIsWalletConnected] = useState(false);
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
 
@@ -37,7 +38,7 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
     try {
       await connect();
     } catch (error) {
-      console.error('Failed to connect wallet:', error);
+      console.error("Failed to connect wallet:", error);
     }
   };
 
@@ -45,7 +46,7 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
     try {
       await disconnect();
     } catch (error) {
-      console.error('Failed to disconnect wallet:', error);
+      console.error("Failed to disconnect wallet:", error);
     }
   };
 
@@ -58,8 +59,6 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
   };
 
   return (
-    <WalletContext.Provider value={value}>
-      {children}
-    </WalletContext.Provider>
+    <WalletContext.Provider value={value}>{children}</WalletContext.Provider>
   );
 };

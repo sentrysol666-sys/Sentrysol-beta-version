@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { X } from 'lucide-react';
+import React, { useState } from "react";
+import { X } from "lucide-react";
 
 // TypeScript declaration for window.ethereum
 declare global {
@@ -11,11 +11,16 @@ declare global {
     };
   }
 }
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { useWallet } from '@/contexts/WalletContext';
-import { useWallet as useSolanaWallet } from '@solana/wallet-adapter-react';
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { useWallet } from "@/contexts/WalletContext";
+import { useWallet as useSolanaWallet } from "@solana/wallet-adapter-react";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 interface WalletConnectionModalProps {
   isOpen: boolean;
@@ -26,35 +31,38 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
   isOpen,
   onClose,
 }) => {
-  const { isWalletConnected, walletAddress, connectWallet, isConnecting } = useWallet();
+  const { isWalletConnected, walletAddress, connectWallet, isConnecting } =
+    useWallet();
   const { select, wallets } = useSolanaWallet();
-  const [selectedNetwork, setSelectedNetwork] = useState<'solana' | 'ethereum'>('solana');
+  const [selectedNetwork, setSelectedNetwork] = useState<"solana" | "ethereum">(
+    "solana",
+  );
   const [connecting, setConnecting] = useState(false);
 
   const handleWalletSelect = async (walletName: string) => {
     setConnecting(true);
     try {
-      if (selectedNetwork === 'solana') {
-        const wallet = wallets.find(w =>
-          w.adapter.name.toLowerCase().includes(walletName.toLowerCase())
+      if (selectedNetwork === "solana") {
+        const wallet = wallets.find((w) =>
+          w.adapter.name.toLowerCase().includes(walletName.toLowerCase()),
         );
         if (wallet) {
           select(wallet.adapter.name);
           await connectWallet();
         }
-      } else if (selectedNetwork === 'ethereum') {
+      } else if (selectedNetwork === "ethereum") {
         // Handle Ethereum wallet connection
-        if (walletName === 'metamask' && window.ethereum) {
+        if (walletName === "metamask" && window.ethereum) {
           try {
-            await window.ethereum.request({ method: 'eth_requestAccounts' });
+            await window.ethereum.request({ method: "eth_requestAccounts" });
             onClose();
           } catch (error) {
-            console.error('MetaMask connection failed:', error);
+            console.error("MetaMask connection failed:", error);
           }
         }
       }
     } catch (error) {
-      console.error('Wallet connection failed:', error);
+      console.error("Wallet connection failed:", error);
     } finally {
       setConnecting(false);
     }
@@ -84,19 +92,22 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
 
         <div className="space-y-8 py-4">
           <p className="text-white/70 text-center text-lg">
-            Choose your preferred network and connect your wallet to start using SentrySol's advanced security features.
+            Choose your preferred network and connect your wallet to start using
+            SentrySol's advanced security features.
           </p>
 
           {/* Network Selection */}
           <div className="space-y-4">
-            <h3 className="text-white font-semibold text-lg text-center">Select Network</h3>
+            <h3 className="text-white font-semibold text-lg text-center">
+              Select Network
+            </h3>
             <div className="grid grid-cols-2 gap-4">
               <Button
-                onClick={() => setSelectedNetwork('solana')}
+                onClick={() => setSelectedNetwork("solana")}
                 className={`h-16 text-lg font-medium rounded-xl border-2 transition-all ${
-                  selectedNetwork === 'solana'
-                    ? 'bg-[#00090B] border-[#00090B] text-white'
-                    : 'bg-transparent border-white/20 text-white/70 hover:border-white/40'
+                  selectedNetwork === "solana"
+                    ? "bg-[#00090B] border-[#00090B] text-white"
+                    : "bg-transparent border-white/20 text-white/70 hover:border-white/40"
                 }`}
               >
                 <div className="flex flex-col items-center gap-2">
@@ -110,11 +121,11 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
               </Button>
 
               <Button
-                onClick={() => setSelectedNetwork('ethereum')}
+                onClick={() => setSelectedNetwork("ethereum")}
                 className={`h-16 text-lg font-medium rounded-xl border-2 transition-all ${
-                  selectedNetwork === 'ethereum'
-                    ? 'bg-[#00090B] border-[#00090B] text-white'
-                    : 'bg-transparent border-white/20 text-white/70 hover:border-white/40'
+                  selectedNetwork === "ethereum"
+                    ? "bg-[#00090B] border-[#00090B] text-white"
+                    : "bg-transparent border-white/20 text-white/70 hover:border-white/40"
                 }`}
               >
                 <div className="flex flex-col items-center gap-2">
@@ -132,13 +143,15 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
           {/* Wallet Selection */}
           <div className="space-y-4">
             <h3 className="text-white font-semibold text-lg text-center">
-              {selectedNetwork === 'solana' ? 'Solana Wallets' : 'Ethereum Wallets'}
+              {selectedNetwork === "solana"
+                ? "Solana Wallets"
+                : "Ethereum Wallets"}
             </h3>
 
-            {selectedNetwork === 'solana' ? (
+            {selectedNetwork === "solana" ? (
               <div className="space-y-3">
                 <Button
-                  onClick={() => handleWalletSelect('phantom')}
+                  onClick={() => handleWalletSelect("phantom")}
                   disabled={connecting || isConnecting}
                   className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px] disabled:opacity-50"
                 >
@@ -152,7 +165,7 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
                   </div>
                 </Button>
                 <Button
-                  onClick={() => handleWalletSelect('solflare')}
+                  onClick={() => handleWalletSelect("solflare")}
                   disabled={connecting || isConnecting}
                   className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px] disabled:opacity-50"
                 >
@@ -169,7 +182,7 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
             ) : (
               <div className="space-y-3">
                 <Button
-                  onClick={() => handleWalletSelect('metamask')}
+                  onClick={() => handleWalletSelect("metamask")}
                   disabled={connecting || isConnecting}
                   className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px] disabled:opacity-50"
                 >
@@ -183,7 +196,9 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
 
             {connecting && (
               <div className="text-center space-y-2 mt-4 p-4 bg-blue-500/10 border border-blue-500/20 rounded-xl">
-                <p className="text-blue-400 text-lg font-semibold">🔄 Connecting...</p>
+                <p className="text-blue-400 text-lg font-semibold">
+                  🔄 Connecting...
+                </p>
                 <p className="text-white/60 text-sm">
                   Please approve the connection in your wallet
                 </p>
@@ -192,7 +207,9 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
 
             {isWalletConnected && walletAddress && (
               <div className="text-center space-y-2 mt-4 p-4 bg-green-500/10 border border-green-500/20 rounded-xl">
-                <p className="text-green-400 text-lg font-semibold">✓ Wallet Connected</p>
+                <p className="text-green-400 text-lg font-semibold">
+                  ✓ Wallet Connected
+                </p>
                 <p className="text-white/80 text-sm font-mono">
                   {walletAddress.slice(0, 8)}...{walletAddress.slice(-8)}
                 </p>
@@ -205,7 +222,8 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
               Secure connection via official wallet extensions
             </p>
             <p className="text-white/40">
-              By connecting, you agree to our Terms of Service and Privacy Policy
+              By connecting, you agree to our Terms of Service and Privacy
+              Policy
             </p>
           </div>
         </div>

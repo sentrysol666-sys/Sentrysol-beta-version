@@ -14,7 +14,7 @@ export default function Pricing() {
 
   const handleConnect = () => {
     if (isWalletConnected) {
-      navigate('/dashboard');
+      navigate("/dashboard");
     } else {
       setIsWalletModalOpen(true);
     }
@@ -71,7 +71,10 @@ export default function Pricing() {
           background: "linear-gradient(180deg, #395B64 0%, #000 121.3%)",
         }}
       >
-        <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+        <Link
+          to="/"
+          className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+        >
           <img
             src="https://cdn.builder.io/api/v1/image/assets%2F1bea0cc41c084038a6a915a367aa70f5%2F04eb1088e2114c479fc8093c14f130fb?format=webp&width=800"
             alt="SentrySol Logo"
@@ -112,7 +115,11 @@ export default function Pricing() {
             onClick={handleConnect}
             className="bg-white hover:bg-white/90 text-black text-2xl font-medium px-8 py-6 rounded-full"
           >
-            {isWalletConnected ? (walletAddress ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : 'Connected') : 'Connect'}
+            {isWalletConnected
+              ? walletAddress
+                ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
+                : "Connected"
+              : "Connect"}
           </Button>
         </div>
 
@@ -181,7 +188,11 @@ export default function Pricing() {
                 onClick={handleConnect}
                 className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20"
               >
-                {isWalletConnected ? (walletAddress ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : 'Connected') : 'Connect'}
+                {isWalletConnected
+                  ? walletAddress
+                    ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
+                    : "Connected"
+                  : "Connect"}
               </Button>
             </div>
           </div>

@@ -14,7 +14,7 @@ export default function Index() {
 
   const handleGetStarted = () => {
     if (isWalletConnected) {
-      navigate('/dashboard');
+      navigate("/dashboard");
     } else {
       setIsWalletModalOpen(true);
     }
@@ -70,7 +70,11 @@ export default function Index() {
             onClick={handleGetStarted}
             className="bg-white hover:bg-white/90 text-black text-2xl font-medium px-8 py-6 rounded-full"
           >
-            {isWalletConnected ? (walletAddress ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : 'Connected') : 'Start Demo'}
+            {isWalletConnected
+              ? walletAddress
+                ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
+                : "Connected"
+              : "Start Demo"}
           </Button>
         </div>
 
@@ -139,7 +143,11 @@ export default function Index() {
                 onClick={handleGetStarted}
                 className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20"
               >
-                {isWalletConnected ? (walletAddress ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : 'Connected') : 'Start Demo'}
+                {isWalletConnected
+                  ? walletAddress
+                    ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
+                    : "Connected"
+                  : "Start Demo"}
               </Button>
             </div>
           </div>
@@ -169,7 +177,7 @@ export default function Index() {
             onClick={handleGetStarted}
             className="bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/30 px-10 py-6 text-lg font-medium rounded-xl backdrop-blur-sm"
           >
-            {isWalletConnected ? 'GO TO DASHBOARD' : 'START DEMO'}
+            {isWalletConnected ? "GO TO DASHBOARD" : "START DEMO"}
           </Button>
         </div>
         <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
@@ -314,7 +322,7 @@ export default function Index() {
             onClick={handleGetStarted}
             className="bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/30 px-8 py-6 text-lg"
           >
-            {isWalletConnected ? 'GO TO DASHBOARD' : 'Start Now'}
+            {isWalletConnected ? "GO TO DASHBOARD" : "Start Now"}
           </Button>
         </div>
       </section>
