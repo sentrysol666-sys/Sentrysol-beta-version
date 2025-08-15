@@ -181,6 +181,15 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
               </div>
             )}
 
+            {connecting && (
+              <div className="text-center space-y-2 mt-4 p-4 bg-blue-500/10 border border-blue-500/20 rounded-xl">
+                <p className="text-blue-400 text-lg font-semibold">🔄 Connecting...</p>
+                <p className="text-white/60 text-sm">
+                  Please approve the connection in your wallet
+                </p>
+              </div>
+            )}
+
             {isWalletConnected && walletAddress && (
               <div className="text-center space-y-2 mt-4 p-4 bg-green-500/10 border border-green-500/20 rounded-xl">
                 <p className="text-green-400 text-lg font-semibold">✓ Wallet Connected</p>
