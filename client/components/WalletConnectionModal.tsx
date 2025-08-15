@@ -94,7 +94,6 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
 
             {selectedNetwork === 'solana' ? (
               <div className="space-y-3">
-                <WalletMultiButton className="!w-full !bg-[#00090B] !hover:bg-[#00090B]/90 !text-white !border !border-white/20 !rounded-xl !px-6 !py-4 !text-lg !font-medium !min-h-[60px]" />
                 <Button className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px]">
                   <div className="flex items-center gap-3">
                     <span>👻</span>
@@ -118,18 +117,6 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
                   <div className="flex items-center gap-3">
                     <span>🦊</span>
                     <span>MetaMask</span>
-                  </div>
-                </Button>
-                <Button className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px]">
-                  <div className="flex items-center gap-3">
-                    <span>🌈</span>
-                    <span>Rainbow Wallet</span>
-                  </div>
-                </Button>
-                <Button className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px]">
-                  <div className="flex items-center gap-3">
-                    <span>🔗</span>
-                    <span>WalletConnect</span>
                   </div>
                 </Button>
               </div>
