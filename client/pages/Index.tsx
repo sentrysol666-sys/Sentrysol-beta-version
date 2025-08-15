@@ -82,12 +82,12 @@ export default function Index() {
                 >
                   Docs
                 </a>
-                <a
-                  href="#"
+                <Link
+                  to="/pricing"
                   className="text-white font-poppins text-lg font-normal leading-none hover:text-white/80 transition-colors"
                 >
                   Pricing
-                </a>
+                </Link>
                 <WalletMultiButton className="!bg-white !text-black !font-poppins !text-lg !font-normal !leading-none !px-4 !py-2 !rounded-full hover:!bg-white/90 !transition-colors !border-none" />
               </div>
             </div>
