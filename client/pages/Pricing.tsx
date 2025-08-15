@@ -209,7 +209,7 @@ export default function Pricing() {
 
               {/* CTA Button */}
               <div className="mb-6">
-                <Button className="w-full bg-[#00FFF2] hover:bg-[#00FFF2]/90 text-white text-xl font-medium py-6 rounded-[30px] shadow-lg">
+                <Button className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white text-xl font-medium py-6 rounded-[30px] shadow-lg">
                   {tier.buttonText}
                 </Button>
               </div>
