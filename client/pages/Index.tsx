@@ -315,7 +315,7 @@ export default function Index() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-b from-teal-900/20 to-black px-8 lg:px-48 py-16">
+      <footer className="px-8 lg:px-48 py-16" style={{ background: "#2C3333" }}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 max-w-7xl mx-auto">
           {/* Newsletter */}
           <div className="lg:col-span-2">
