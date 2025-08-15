@@ -10,9 +10,14 @@ export default function Index() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
   const { isWalletConnected, walletAddress } = useWallet();
+  const navigate = useNavigate();
 
   const handleGetStarted = () => {
-    setIsWalletModalOpen(true);
+    if (isWalletConnected) {
+      navigate('/dashboard');
+    } else {
+      setIsWalletModalOpen(true);
+    }
   };
 
   return (
