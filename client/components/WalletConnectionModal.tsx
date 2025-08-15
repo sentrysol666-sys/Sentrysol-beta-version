@@ -74,7 +74,7 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
                   <img
                     src="https://cdn.builder.io/api/v1/image/assets%2Fb362352d7ea84bc3a397619b43158846%2F5d04d76da7b64de9a5ec34babe31fdd3?format=webp&width=800"
                     alt="Ethereum"
-                    className="w-8 h-8"
+                    className="w-5 h-5"
                   />
                   <span>Ethereum</span>
                 </div>
@@ -99,7 +99,11 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
                 </Button>
                 <Button className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px]">
                   <div className="flex items-center gap-3">
-                    <span>🔥</span>
+                    <img
+                      src="https://cdn.builder.io/api/v1/image/assets%2Fb362352d7ea84bc3a397619b43158846%2F0ef7749742f14bd8aaf4ac6ef43c7111?format=webp&width=800"
+                      alt="Solflare"
+                      className="w-5 h-5"
+                    />
                     <span>Solflare Wallet</span>
                   </div>
                 </Button>
