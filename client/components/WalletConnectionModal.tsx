@@ -96,7 +96,11 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
               <div className="space-y-3">
                 <Button className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px]">
                   <div className="flex items-center gap-3">
-                    <span>👻</span>
+                    <img
+                      src="https://cdn.builder.io/api/v1/image/assets%2Fb362352d7ea84bc3a397619b43158846%2Fa0ee3721c6204611aff0d26a60c15edd?format=webp&width=800"
+                      alt="Phantom"
+                      className="w-5 h-5"
+                    />
                     <span>Phantom Wallet</span>
                   </div>
                 </Button>
