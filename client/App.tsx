@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { WalletContextProvider } from "@/components/WalletProvider";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
+import Pricing from "./pages/Pricing";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
