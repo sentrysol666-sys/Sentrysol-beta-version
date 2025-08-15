@@ -352,6 +352,12 @@ export default function Pricing() {
           <p>SentrySol, 2025</p>
         </div>
       </footer>
+
+      {/* Wallet Connection Modal */}
+      <WalletConnectionModal
+        isOpen={isWalletModalOpen}
+        onClose={() => setIsWalletModalOpen(false)}
+      />
     </div>
   );
 }
