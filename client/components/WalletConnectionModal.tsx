@@ -32,6 +32,7 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
   const [connecting, setConnecting] = useState(false);
 
   const handleWalletSelect = async (walletName: string) => {
+    setConnecting(true);
     try {
       if (selectedNetwork === 'solana') {
         const wallet = wallets.find(w =>
@@ -54,6 +55,8 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
       }
     } catch (error) {
       console.error('Wallet connection failed:', error);
+    } finally {
+      setConnecting(false);
     }
   };
 
