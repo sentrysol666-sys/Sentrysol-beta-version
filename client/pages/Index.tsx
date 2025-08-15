@@ -387,10 +387,6 @@ export default function Index() {
 
         {/* Footer Bottom */}
         <div className="border-t border-white/15 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center text-white/60">
-          <div className="flex items-center gap-4 mb-4 md:mb-0">
-            <div className="w-12 h-12 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full"></div>
-            <div className="w-12 h-12 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full"></div>
-          </div>
           <p>SentrySol, 2025</p>
         </div>
       </footer>
