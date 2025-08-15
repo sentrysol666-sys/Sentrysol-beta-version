@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -15,6 +15,7 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
   onClose,
 }) => {
   const { isWalletConnected, walletAddress } = useWallet();
+  const [selectedNetwork, setSelectedNetwork] = useState<'solana' | 'ethereum'>('solana');
 
   React.useEffect(() => {
     if (isWalletConnected) {
@@ -24,9 +25,9 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md bg-black/95 border border-white/20 text-white">
+      <DialogContent className="sm:max-w-lg bg-black/95 border border-white/20 text-white">
         <DialogHeader>
-          <DialogTitle className="text-xl font-semibold text-white">
+          <DialogTitle className="text-2xl font-semibold text-white text-center mb-6">
             Connect Your Wallet
           </DialogTitle>
           <button
@@ -37,33 +38,107 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
             <span className="sr-only">Close</span>
           </button>
         </DialogHeader>
-        
-        <div className="space-y-6 py-4">
-          <p className="text-white/70 text-center">
-            Connect your Solana wallet to start using SentrySol's advanced security features.
+
+        <div className="space-y-8 py-4">
+          <p className="text-white/70 text-center text-lg">
+            Choose your preferred network and connect your wallet to start using SentrySol's advanced security features.
           </p>
-          
-          <div className="flex flex-col space-y-4">
-            <div className="flex justify-center">
-              <WalletMultiButton className="!bg-white/10 !hover:bg-white/20 !text-white !border !border-white/20 !rounded-lg !px-6 !py-3 !text-base !font-medium" />
+
+          {/* Network Selection */}
+          <div className="space-y-4">
+            <h3 className="text-white font-semibold text-lg text-center">Select Network</h3>
+            <div className="grid grid-cols-2 gap-4">
+              <Button
+                onClick={() => setSelectedNetwork('solana')}
+                className={`h-16 text-lg font-medium rounded-xl border-2 transition-all ${
+                  selectedNetwork === 'solana'
+                    ? 'bg-[#00090B] border-[#00090B] text-white'
+                    : 'bg-transparent border-white/20 text-white/70 hover:border-white/40'
+                }`}
+              >
+                <div className="flex flex-col items-center gap-2">
+                  <span>🔮</span>
+                  <span>Solana</span>
+                </div>
+              </Button>
+
+              <Button
+                onClick={() => setSelectedNetwork('ethereum')}
+                className={`h-16 text-lg font-medium rounded-xl border-2 transition-all ${
+                  selectedNetwork === 'ethereum'
+                    ? 'bg-[#00090B] border-[#00090B] text-white'
+                    : 'bg-transparent border-white/20 text-white/70 hover:border-white/40'
+                }`}
+              >
+                <div className="flex flex-col items-center gap-2">
+                  <span>⟠</span>
+                  <span>Ethereum</span>
+                </div>
+              </Button>
             </div>
-            
+          </div>
+
+          {/* Wallet Selection */}
+          <div className="space-y-4">
+            <h3 className="text-white font-semibold text-lg text-center">
+              {selectedNetwork === 'solana' ? 'Solana Wallets' : 'Ethereum Wallets'}
+            </h3>
+
+            {selectedNetwork === 'solana' ? (
+              <div className="space-y-3">
+                <WalletMultiButton className="!w-full !bg-[#00090B] !hover:bg-[#00090B]/90 !text-white !border !border-white/20 !rounded-xl !px-6 !py-4 !text-lg !font-medium !min-h-[60px]" />
+                <Button className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px]">
+                  <div className="flex items-center gap-3">
+                    <span>👻</span>
+                    <span>Phantom Wallet</span>
+                  </div>
+                </Button>
+                <Button className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px]">
+                  <div className="flex items-center gap-3">
+                    <span>🔥</span>
+                    <span>Solflare Wallet</span>
+                  </div>
+                </Button>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                <Button className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px]">
+                  <div className="flex items-center gap-3">
+                    <span>🦊</span>
+                    <span>MetaMask</span>
+                  </div>
+                </Button>
+                <Button className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px]">
+                  <div className="flex items-center gap-3">
+                    <span>🌈</span>
+                    <span>Rainbow Wallet</span>
+                  </div>
+                </Button>
+                <Button className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/20 rounded-xl px-6 py-4 text-lg font-medium min-h-[60px]">
+                  <div className="flex items-center gap-3">
+                    <span>🔗</span>
+                    <span>WalletConnect</span>
+                  </div>
+                </Button>
+              </div>
+            )}
+
             {isWalletConnected && walletAddress && (
-              <div className="text-center space-y-2">
-                <p className="text-green-400 text-sm">✓ Wallet Connected</p>
-                <p className="text-white/60 text-xs font-mono">
+              <div className="text-center space-y-2 mt-4 p-4 bg-green-500/10 border border-green-500/20 rounded-xl">
+                <p className="text-green-400 text-lg font-semibold">✓ Wallet Connected</p>
+                <p className="text-white/80 text-sm font-mono">
                   {walletAddress.slice(0, 8)}...{walletAddress.slice(-8)}
                 </p>
               </div>
             )}
           </div>
-          
-          <div className="text-center space-y-2">
-            <p className="text-white/50 text-xs">
-              Supported wallets: Phantom, Solflare, and more
+
+          <div className="text-center space-y-2 text-sm">
+            <p className="text-white/50">
+              Secure connection via official wallet extensions
             </p>
-            <p className="text-white/40 text-xs">
-              By connecting, you agree to our Terms of Service
+            <p className="text-white/40">
+              By connecting, you agree to our Terms of Service and Privacy Policy
             </p>
           </div>
         </div>
