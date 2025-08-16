@@ -72,6 +72,7 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
 
   React.useEffect(() => {
     if (isWalletConnected) {
+      setConnecting(false);
       onClose();
     }
   }, [isWalletConnected, onClose]);
