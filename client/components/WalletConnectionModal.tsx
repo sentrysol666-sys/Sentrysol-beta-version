@@ -47,8 +47,17 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
           w.adapter.name.toLowerCase().includes(walletName.toLowerCase()),
         );
         if (wallet) {
+          // First select the wallet
           select(wallet.adapter.name);
-          await connectWallet();
+          // Wait a bit for the selection to complete
+          setTimeout(async () => {
+            try {
+              await connectWallet();
+            } catch (error) {
+              console.error("Wallet connection failed:", error);
+              setConnecting(false);
+            }
+          }, 100);
         }
       } else if (selectedNetwork === "ethereum") {
         // Handle Ethereum wallet connection
@@ -60,10 +69,10 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
             console.error("MetaMask connection failed:", error);
           }
         }
+        setConnecting(false);
       }
     } catch (error) {
       console.error("Wallet connection failed:", error);
-    } finally {
       setConnecting(false);
     }
   };
