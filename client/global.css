@@ -1,5 +1,5 @@
 /* Wallet Adapter Styles */
-@import '@solana/wallet-adapter-react-ui/styles.css';
+@import "@solana/wallet-adapter-react-ui/styles.css";
 
 @tailwind base;
 @tailwind components;
@@ -166,7 +166,7 @@
   border-radius: 8px !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
-  font-family: 'Poppins', sans-serif !important;
+  font-family: "Poppins", sans-serif !important;
 }
 
 .wallet-adapter-dropdown-list-item:hover {
