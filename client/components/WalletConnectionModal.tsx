@@ -47,17 +47,10 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
           w.adapter.name.toLowerCase().includes(walletName.toLowerCase()),
         );
         if (wallet) {
-          // First select the wallet
+          // Select and connect in one step using the Solana wallet adapter
           select(wallet.adapter.name);
-          // Wait a bit for the selection to complete
-          setTimeout(async () => {
-            try {
-              await connectWallet();
-            } catch (error) {
-              console.error("Wallet connection failed:", error);
-              setConnecting(false);
-            }
-          }, 100);
+          // Use the direct Solana connect method instead of our wrapper
+          await solanaConnect();
         }
       } else if (selectedNetwork === "ethereum") {
         // Handle Ethereum wallet connection
@@ -69,10 +62,10 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
             console.error("MetaMask connection failed:", error);
           }
         }
-        setConnecting(false);
       }
     } catch (error) {
       console.error("Wallet connection failed:", error);
+    } finally {
       setConnecting(false);
     }
   };
