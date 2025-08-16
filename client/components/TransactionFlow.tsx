@@ -79,6 +79,7 @@ export const TransactionFlow: React.FC<TransactionFlowProps> = ({ walletAddress,
   const [flowData, setFlowData] = useState<FlowData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isUsingMockData, setIsUsingMockData] = useState(false);
   const [activeTab, setActiveTab] = useState<'overview' | 'inflow' | 'outflow' | 'timeline'>('overview');
 
   useEffect(() => {
