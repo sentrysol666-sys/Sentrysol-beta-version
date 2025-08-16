@@ -35,13 +35,13 @@ interface FlowData {
   graph_data: any;
 }
 
-const generateMockFlowData = (): FlowData => {
+const generateMockFlowData = (address: string): FlowData => {
   const now = Date.now();
   const oneDay = 24 * 60 * 60 * 1000;
 
   const mockInflow = Array.from({ length: 15 }, (_, i) => ({
     from_address: `${Math.random().toString(36).substring(2, 15)}...${Math.random().toString(36).substring(2, 10)}`,
-    to_address: walletAddress || 'current_wallet',
+    to_address: address || 'current_wallet',
     amount: Math.random() * 10 + 0.1,
     token: 'SOL',
     signature: Math.random().toString(36).substring(2, 15),
@@ -50,7 +50,7 @@ const generateMockFlowData = (): FlowData => {
   }));
 
   const mockOutflow = Array.from({ length: 12 }, (_, i) => ({
-    from_address: walletAddress || 'current_wallet',
+    from_address: address || 'current_wallet',
     to_address: `${Math.random().toString(36).substring(2, 15)}...${Math.random().toString(36).substring(2, 10)}`,
     amount: Math.random() * 8 + 0.1,
     token: 'SOL',
