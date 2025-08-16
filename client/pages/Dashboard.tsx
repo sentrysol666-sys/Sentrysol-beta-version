@@ -452,7 +452,9 @@ export default function Dashboard() {
             </Link>
             <span className="text-white/60 font-poppins text-sm">Security Dashboard</span>
           </div>
-          <WalletMultiButton className="!bg-sentry-sage !text-black !font-poppins !rounded-full hover:!bg-sentry-sage/90" />
+          <div className="relative">
+            <WalletMultiButton className="!bg-sentry-sage !text-black !font-poppins !rounded-full hover:!bg-sentry-sage/90 !z-50" />
+          </div>
         </div>
       </header>
 
