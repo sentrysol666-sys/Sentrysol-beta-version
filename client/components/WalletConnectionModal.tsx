@@ -33,7 +33,7 @@ export const WalletConnectionModal: React.FC<WalletConnectionModalProps> = ({
 }) => {
   const { isWalletConnected, walletAddress, connectWallet, isConnecting } =
     useWallet();
-  const { select, wallets } = useSolanaWallet();
+  const { select, wallets, connect: solanaConnect } = useSolanaWallet();
   const [selectedNetwork, setSelectedNetwork] = useState<"solana" | "ethereum">(
     "solana",
   );
