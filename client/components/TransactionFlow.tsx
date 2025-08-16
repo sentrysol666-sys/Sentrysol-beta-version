@@ -242,7 +242,14 @@ export const TransactionFlow: React.FC<TransactionFlowProps> = ({ walletAddress,
   return (
     <div className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-white font-poppins text-xl font-semibold">Transaction Flow Analysis</h3>
+        <div className="flex items-center gap-3">
+          <h3 className="text-white font-poppins text-xl font-semibold">Transaction Flow Analysis</h3>
+          {isUsingMockData && (
+            <span className="bg-orange-500/20 text-orange-300 text-xs px-2 py-1 rounded-full font-poppins">
+              Demo Data
+            </span>
+          )}
+        </div>
         <div className="flex gap-2">
           <button
             onClick={() => setActiveTab('overview')}
