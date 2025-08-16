@@ -97,7 +97,7 @@ export const TransactionFlow: React.FC<TransactionFlowProps> = ({ walletAddress,
       if (!backendUrl) {
         // Use mock data when no backend is configured
         console.warn('No backend URL configured, using mock data');
-        const mockData = generateMockFlowData();
+        const mockData = generateMockFlowData(walletAddress);
         setFlowData(mockData);
         setIsLoading(false);
         return;
@@ -124,7 +124,7 @@ export const TransactionFlow: React.FC<TransactionFlowProps> = ({ walletAddress,
 
       // Fallback to mock data if API fails
       console.warn('API failed, falling back to mock data');
-      const mockData = generateMockFlowData();
+      const mockData = generateMockFlowData(walletAddress);
       setFlowData(mockData);
       setError(null); // Clear error since we have fallback data
     } finally {
