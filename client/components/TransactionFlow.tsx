@@ -35,6 +35,46 @@ interface FlowData {
   graph_data: any;
 }
 
+const generateMockFlowData = (): FlowData => {
+  const now = Date.now();
+  const oneDay = 24 * 60 * 60 * 1000;
+
+  const mockInflow = Array.from({ length: 15 }, (_, i) => ({
+    from_address: `${Math.random().toString(36).substring(2, 15)}...${Math.random().toString(36).substring(2, 10)}`,
+    to_address: walletAddress || 'current_wallet',
+    amount: Math.random() * 10 + 0.1,
+    token: 'SOL',
+    signature: Math.random().toString(36).substring(2, 15),
+    timestamp: new Date(now - (i * oneDay)).toISOString(),
+    type: 'transfer'
+  }));
+
+  const mockOutflow = Array.from({ length: 12 }, (_, i) => ({
+    from_address: walletAddress || 'current_wallet',
+    to_address: `${Math.random().toString(36).substring(2, 15)}...${Math.random().toString(36).substring(2, 10)}`,
+    amount: Math.random() * 8 + 0.1,
+    token: 'SOL',
+    signature: Math.random().toString(36).substring(2, 15),
+    timestamp: new Date(now - (i * oneDay * 1.5)).toISOString(),
+    type: 'transfer'
+  }));
+
+  const totalInflow = mockInflow.reduce((sum, tx) => sum + tx.amount, 0);
+  const totalOutflow = mockOutflow.reduce((sum, tx) => sum + tx.amount, 0);
+
+  return {
+    inflow_transactions: mockInflow,
+    outflow_transactions: mockOutflow,
+    summary: {
+      total_inflow: totalInflow,
+      total_outflow: totalOutflow,
+      inflow_count: mockInflow.length,
+      outflow_count: mockOutflow.length
+    },
+    graph_data: null
+  };
+};
+
 export const TransactionFlow: React.FC<TransactionFlowProps> = ({ walletAddress, isVisible }) => {
   const [flowData, setFlowData] = useState<FlowData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
