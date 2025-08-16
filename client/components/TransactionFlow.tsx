@@ -100,6 +100,7 @@ export const TransactionFlow: React.FC<TransactionFlowProps> = ({ walletAddress,
         console.warn('No backend URL configured, using mock data');
         const mockData = generateMockFlowData(walletAddress);
         setFlowData(mockData);
+        setIsUsingMockData(true);
         setIsLoading(false);
         return;
       }
@@ -120,6 +121,7 @@ export const TransactionFlow: React.FC<TransactionFlowProps> = ({ walletAddress,
 
       const data = await response.json();
       setFlowData(data);
+      setIsUsingMockData(false);
     } catch (err) {
       console.error('Transaction flow fetch error:', err);
 
@@ -127,6 +129,7 @@ export const TransactionFlow: React.FC<TransactionFlowProps> = ({ walletAddress,
       console.warn('API failed, falling back to mock data');
       const mockData = generateMockFlowData(walletAddress);
       setFlowData(mockData);
+      setIsUsingMockData(true);
       setError(null); // Clear error since we have fallback data
     } finally {
       setIsLoading(false);
