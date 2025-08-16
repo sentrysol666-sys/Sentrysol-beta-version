@@ -18,6 +18,7 @@
     "build:production": "npm run typecheck && npm run build:client && npm run build:server",
     "build:staging": "VITE_ENV=staging npm run build",
     "build:preview": "npm run build && npm run start",
+    "build:railway": "npm install && npm run build:production",
     "start": "node dist/server/node-build.mjs",
     "test": "vitest --run",
     "format.fix": "prettier --write .",
