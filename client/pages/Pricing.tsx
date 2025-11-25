@@ -1,24 +1,66 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Check } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { WalletConnectionModal } from "@/components/WalletConnectionModal";
 import { useWallet } from "@/contexts/WalletContext";
 
-export default function Index() {
+export default function Pricing() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isWalletModalOpen, setIsWalletModalOpen] = useState(false);
   const { isWalletConnected, walletAddress } = useWallet();
   const navigate = useNavigate();
 
-  const handleGetStarted = () => {
+  const handleConnect = () => {
     if (isWalletConnected) {
       navigate("/dashboard");
     } else {
       setIsWalletModalOpen(true);
     }
   };
+
+  const pricingTiers = [
+    {
+      name: "Normies",
+      description: "Perfect for students, Normies, & early adopters.",
+      buttonText: "Get Started",
+      features: [
+        "Cross-chain trace ( SOL & ETH)",
+        "Basic Risk Score & Wallet Screening",
+        "5 address req/day",
+        "Watermark fund flow",
+      ],
+    },
+    {
+      name: "Pro",
+      description: "For independent investigators & small teams",
+      buttonText: "$299 / month",
+      features: [
+        "Cross-chain tracing (up to 3 chains)",
+        "Up to +100req/day",
+        "Email support",
+        "Fund flow visualization",
+        "Monthly report export",
+        "Email support",
+      ],
+    },
+    {
+      name: "Enterprise",
+      description:
+        "Perfect for enterprises, large teams, & advanced security needs.",
+      buttonText: "Contact US",
+      features: [
+        "Unlimited cross-chain coverage",
+        "AML & sanctions screening",
+        "Media monitoring & OSINT tools",
+        "Custom ML model fine-tuning",
+        "Historical chain data access",
+        "Custom API & webhook integration",
+        "24/7 premium support",
+      ],
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -29,14 +71,17 @@ export default function Index() {
           background: "linear-gradient(180deg, #395B64 0%, #000 121.3%)",
         }}
       >
-        <div className="flex items-center gap-3">
+        <Link
+          to="/"
+          className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+        >
           <img
             src="https://cdn.builder.io/api/v1/image/assets%2F1bea0cc41c084038a6a915a367aa70f5%2F04eb1088e2114c479fc8093c14f130fb?format=webp&width=800"
             alt="SentrySol Logo"
             className="w-16 h-16"
           />
           <span className="text-3xl lg:text-4xl font-semibold">SENTRYSOL</span>
-        </div>
+        </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
@@ -67,14 +112,14 @@ export default function Index() {
             Pricing
           </Link>
           <Button
-            onClick={handleGetStarted}
+            onClick={handleConnect}
             className="bg-white hover:bg-white/90 text-black text-2xl font-medium px-8 py-6 rounded-full"
           >
             {isWalletConnected
               ? walletAddress
                 ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
                 : "Connected"
-              : "Start Demo"}
+              : "Connect"}
           </Button>
         </div>
 
@@ -140,14 +185,14 @@ export default function Index() {
                 Pricing
               </Link>
               <Button
-                onClick={handleGetStarted}
+                onClick={handleConnect}
                 className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20"
               >
                 {isWalletConnected
                   ? walletAddress
                     ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
                     : "Connected"
-                  : "Start Demo"}
+                  : "Connect"}
               </Button>
             </div>
           </div>
@@ -155,174 +200,89 @@ export default function Index() {
       </nav>
 
       {/* Hero Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center text-center px-8 lg:px-48 pt-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-teal-900/30 via-teal-950/10 to-black"></div>
+      <section className="pt-40 pb-20 px-8 lg:px-48 text-center relative bg-gradient-to-b from-teal-900/30 to-black">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-400/20 rounded-full blur-3xl"></div>
           <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-blue-400/20 rounded-full blur-3xl"></div>
         </div>
-        <div className="relative z-10 max-w-6xl mx-auto">
-          <h1 className="text-5xl md:text-7xl lg:text-9xl font-light leading-[0.9] mb-12 tracking-tight">
-            THE FASTEST WAY
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <h1 className="text-5xl md:text-7xl lg:text-9xl font-bold leading-tight mb-8 bg-gradient-to-r from-white/0 via-white/80 to-white/0 bg-clip-text text-transparent uppercase tracking-[0.2em]">
+            Simple Plans
             <br />
-            TO TRUST
+            Powerful Protection
           </h1>
-          <p className="text-xl md:text-2xl text-white/70 mb-16 max-w-4xl mx-auto leading-relaxed font-light">
-            Real-time AI threat intelligence for tracing illicit funds,
-            detecting spoofed addresses, screening vulnerable smart contracts,
-            and stopping scams across multiple chains.
-          </p>
-          <Button
-            size="lg"
-            onClick={handleGetStarted}
-            className="bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/30 px-10 py-6 text-lg font-medium rounded-xl backdrop-blur-sm"
-          >
-            {isWalletConnected ? "GO TO DASHBOARD" : "START DEMO"}
-          </Button>
         </div>
-        <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
       </section>
 
-      {/* Blockchain Journey Section */}
-      <section
-        className="py-40 px-8 lg:px-48 relative"
-        style={{
-          background: "linear-gradient(180deg, #0B2228 0%, #000 100%)",
-        }}
-      >
+      {/* Pricing Cards */}
+      <section className="py-20 px-8 lg:px-24 relative bg-gradient-to-b from-black to-teal-900/20">
+        {/* Background Pattern */}
         <div className="absolute inset-0 opacity-30">
-          <div className="w-full h-full bg-gradient-to-r from-transparent via-teal-500/20 to-transparent"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(56,189,248,0.1),transparent_50%)]"></div>
-        </div>
-        <div className="relative z-10 text-center mb-40">
-          <h2 className="text-5xl md:text-7xl lg:text-9xl font-bold leading-[0.85] mb-12 bg-gradient-to-r from-gray-700 via-white to-gray-700 bg-clip-text text-transparent uppercase tracking-wider">
-            PROTECT THE ENTIRE
-            <br />
-            BLOCKCHAIN JOURNEY
-          </h2>
-          <p className="text-2xl md:text-4xl text-white/90 leading-relaxed max-w-6xl mx-auto font-light tracking-wide">
-            Combines on-chain forensics + AI-powered threat scoring + compliance
-            automation in one unified platform.
-          </p>
+          <div className="w-full h-full bg-gradient-to-r from-transparent via-teal-500/10 to-transparent"></div>
         </div>
 
-        {/* Feature Cards */}
-        <div className="grid md:grid-cols-3 gap-12 max-w-7xl mx-auto">
-          <div className="bg-gradient-to-b from-white/8 to-white/2 border border-white/20 rounded-3xl p-10 text-center backdrop-blur-md shadow-2xl hover:shadow-teal-500/20 transition-all duration-300 group">
-            <div className="w-20 h-20 bg-gradient-to-br from-teal-400/30 to-teal-600/30 rounded-full flex items-center justify-center mx-auto mb-8 group-hover:scale-110 transition-transform duration-300">
-              <div className="w-10 h-10 bg-teal-400 rounded-full shadow-lg shadow-teal-400/50"></div>
-            </div>
-            <h3 className="text-2xl font-semibold mb-6 text-white">
-              Compliance-Ready
-              <br />
-              Intelligence
-            </h3>
-            <p className="text-white/70 leading-relaxed text-lg">
-              Advanced compliance framework with automated reporting and
-              regulatory alignment.
-            </p>
-          </div>
+        <div className="relative z-10 grid lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
+          {pricingTiers.map((tier, index) => (
+            <div
+              key={tier.name}
+              className="bg-gradient-to-b from-white/20 to-white/5 border border-white rounded-[3rem] p-12 backdrop-blur-[50px] flex flex-col"
+            >
+              {/* Header */}
+              <div className="mb-12 min-h-[320px] flex flex-col">
+                <h3 className="text-5xl lg:text-6xl font-light mb-6 text-white leading-tight tracking-tight">
+                  {tier.name}
+                </h3>
+                <p className="text-white/80 text-xl leading-relaxed">
+                  {tier.description}
+                </p>
+              </div>
 
-          <div className="bg-gradient-to-b from-white/8 to-white/2 border border-white/20 rounded-3xl p-10 text-center backdrop-blur-md shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 group">
-            <div className="w-20 h-20 bg-gradient-to-br from-blue-400/30 to-blue-600/30 rounded-full flex items-center justify-center mx-auto mb-8 group-hover:scale-110 transition-transform duration-300">
-              <div className="w-10 h-10 bg-blue-400 rounded-full shadow-lg shadow-blue-400/50"></div>
-            </div>
-            <h3 className="text-2xl font-semibold mb-6 text-white">
-              Cross-Chain
-              <br />
-              Tracing
-            </h3>
-            <p className="text-white/70 leading-relaxed text-lg">
-              Track and analyze transactions across multiple blockchain networks
-              in real-time.
-            </p>
-          </div>
+              {/* CTA Button */}
+              <div className="mb-6">
+                <Button className="w-full bg-[#00090B] hover:bg-[#00090B]/90 text-white text-xl font-medium py-6 rounded-[30px] shadow-lg">
+                  {tier.buttonText}
+                </Button>
+              </div>
 
-          <div className="bg-gradient-to-b from-white/8 to-white/2 border border-white/20 rounded-3xl p-10 text-center backdrop-blur-md shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 group">
-            <div className="w-20 h-20 bg-gradient-to-br from-purple-400/30 to-purple-600/30 rounded-full flex items-center justify-center mx-auto mb-8 group-hover:scale-110 transition-transform duration-300">
-              <div className="w-10 h-10 bg-purple-400 rounded-full shadow-lg shadow-purple-400/50"></div>
+              {/* Divider */}
+              <div className="w-full h-px bg-[#8EFFD0] mb-6"></div>
+
+              {/* Features */}
+              <div className="flex-1">
+                <h4 className="text-white text-[22px] font-medium mb-4">
+                  Key features:
+                </h4>
+                <div className="space-y-4">
+                  {tier.features.map((feature, featureIndex) => (
+                    <div key={featureIndex} className="flex items-start gap-4">
+                      <div className="flex-shrink-0 mt-1">
+                        <div className="w-2 h-2 bg-[#14F195] rounded-full"></div>
+                      </div>
+                      <span className="text-white/80 text-xl leading-relaxed">
+                        {feature}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-            <h3 className="text-2xl font-semibold mb-6 text-white">
-              Vulnerability
-              <br />
-              Scanning
-            </h3>
-            <p className="text-white/70 leading-relaxed text-lg">
-              Comprehensive security assessment with automated vulnerability
-              detection.
-            </p>
-          </div>
+          ))}
+        </div>
+
+        {/* Wave Animation */}
+        <div className="absolute bottom-0 left-0 w-full h-64 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-t from-teal-900/30 to-transparent"></div>
         </div>
       </section>
 
-      {/* Vision & Mission Section */}
-      <section className="py-32 px-8 lg:px-48 bg-black">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 max-w-7xl mx-auto">
-          {/* Vision */}
-          <div>
-            <h2 className="text-6xl md:text-8xl lg:text-9xl font-light mb-8 leading-none">
-              Vision
-            </h2>
-            <p className="text-xl md:text-2xl text-white/90 leading-relaxed tracking-wide">
-              We envision a Web3 future where users interact with decentralized
-              applications confidently and securely. SentrySol is building the
-              essential, intelligent, and privacy-preserving security layer
-              needed to unlock the full potential of Web3 on mobile devices.
-            </p>
-          </div>
-
-          {/* Mission */}
-          <div>
-            <h2 className="text-6xl md:text-8xl lg:text-9xl font-light mb-8 leading-none">
-              Mission
-            </h2>
-            <p className="text-xl md:text-2xl text-white/90 leading-relaxed tracking-wide">
-              Empowering Users, Fostering trust and confidence in every Web3
-              interaction.
-              <br />
-              <br />
-              Securing the Ecosystem, Protecting against evolving threats like
-              blind signing and wallet draining.
-              <br />
-              <br />
-              Driving Adoption, Making Web3 accessible and safe for everyone.
-            </p>
-          </div>
-        </div>
-
-        {/* 3D Visual Element */}
-        <div className="mt-32 flex justify-center">
-          <div className="relative w-96 h-96">
-            <div className="absolute inset-0 bg-gradient-to-r from-teal-400/20 to-blue-400/20 rounded-full blur-3xl"></div>
-            <div className="relative z-10 grid grid-cols-4 gap-4 p-8">
-              {Array.from({ length: 16 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="w-16 h-16 bg-gradient-to-br from-teal-400/30 to-blue-400/30 rounded-lg border border-teal-400/50"
-                  style={{
-                    transform: `perspective(1000px) rotateX(${(i % 4) * 15}deg) rotateY(${Math.floor(i / 4) * 15}deg)`,
-                    animationDelay: `${i * 0.1}s`,
-                  }}
-                ></div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA Section */}
-      <section className="py-32 px-8 lg:px-48 bg-gradient-to-b from-black to-teal-900/20 text-center">
+      {/* FAQs Section */}
+      <section className="py-32 px-8 lg:px-48 text-center bg-gradient-to-b from-teal-900/20 to-black">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-light mb-8 leading-tight">
-            Deploy and take control of blockchain risk — across chains, threats,
-            and markets.
+          <h2 className="text-6xl md:text-8xl lg:text-9xl font-light mb-12 tracking-[4rem] text-white">
+            F A Q s
           </h2>
-          <Button
-            size="lg"
-            onClick={handleGetStarted}
-            className="bg-[#00090B] hover:bg-[#00090B]/90 text-white border border-white/30 px-8 py-6 text-lg"
-          >
-            {isWalletConnected ? "GO TO DASHBOARD" : "Start Now"}
+          <Button className="bg-teal-500/20 hover:bg-teal-500/30 text-white border-0 text-2xl font-light px-12 py-6 rounded-[33px] tracking-wide">
+            Read More
           </Button>
         </div>
       </section>
@@ -341,7 +301,7 @@ export default function Index() {
                 />
                 <span className="text-xl font-semibold">SENTRYSOL</span>
               </div>
-              <p className="text-white/60 text-lg leading-relaxed max-w-md">
+              <p className="text-white/60 text-lg leading-relaxed max-w-md mb-8">
                 SentrySol is an AI-native, on-device behavioral security
                 framework built specifically for Web3 mobile environments,
                 initially focusing on Solana Mobile Seeker.
@@ -353,9 +313,9 @@ export default function Index() {
               <div className="flex gap-4 max-w-md">
                 <Input
                   placeholder="Enter Your Email"
-                  className="bg-white/5 border-white/20 text-white placeholder:text-white/60"
+                  className="bg-white/5 border-white/20 text-white placeholder:text-white/60 rounded-xl"
                 />
-                <Button className="bg-white/10 hover:bg-white/20 text-white border border-white/20">
+                <Button className="bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-xl px-8">
                   Submit
                 </Button>
               </div>

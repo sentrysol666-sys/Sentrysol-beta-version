@@ -1,5 +1,5 @@
 /* Wallet Adapter Styles */
-@import '@solana/wallet-adapter-react-ui/styles.css';
+@import "@solana/wallet-adapter-react-ui/styles.css";
 
 @tailwind base;
 @tailwind components;
@@ -137,5 +137,62 @@
       #395b64 75%,
       #000 100%
     );
+  }
+}
+
+/* Wallet Adapter Dropdown Fixes */
+.wallet-adapter-dropdown {
+  position: relative !important;
+}
+
+.wallet-adapter-dropdown-list {
+  position: absolute !important;
+  top: 100% !important;
+  right: 0 !important;
+  z-index: 9999 !important;
+  background: rgba(0, 0, 0, 0.95) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+  min-width: 160px !important;
+  padding: 8px !important;
+  margin-top: 8px !important;
+}
+
+.wallet-adapter-dropdown-list-item {
+  color: rgba(255, 255, 255, 0.8) !important;
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  font-family: "Poppins", sans-serif !important;
+}
+
+.wallet-adapter-dropdown-list-item:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+}
+
+.wallet-adapter-button-trigger {
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Fix for dropdown positioning in Dashboard */
+.wallet-adapter-dropdown .wallet-adapter-dropdown-list-active {
+  display: block !important;
+  animation: fadeIn 0.2s ease-in-out !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
